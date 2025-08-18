@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Babysitter Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Babysitter Tracker</h1>
+
+    <!-- Babysitter Form -->
+    <form id="babysitterForm" novalidate>
+      <input type="text" id="name" placeholder="Name">
+      <span class="error" id="nameError"></span>
+
+      <input type="number" id="age" placeholder="Age">
+      <span class="error" id="ageError"></span>
+
+      <input type="text" id="contact" placeholder="Contact Number">
+      <span class="error" id="contactError"></span>
+
+      <input type="text" id="availability" placeholder="Availability (e.g. Weekends)">
+      <span class="error" id="availabilityError"></span>
+
+      <input type="number" id="rate" placeholder="Hourly Rate ($)">
+      <span class="error" id="rateError"></span>
+
+      <input type="number" id="experience" placeholder="Years of Experience">
+      <span class="error" id="experienceError"></span>
+
+      <textarea id="notes" placeholder="Notes (optional)"></textarea>
+
+      <button type="submit">Add Babysitter</button>
+    </form>
+
+    <!-- Babysitter Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Contact</th>
+          <th>Availability</th>
+          <th>Rate</th>
+          <th>Experience</th>
+          <th>Notes</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="babysitterList">
+        <tr>
+          <td colspan="8">No babysitters added yet.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
