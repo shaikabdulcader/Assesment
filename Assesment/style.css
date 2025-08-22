@@ -1,121 +1,148 @@
-/* Body Styling */
+/* General Body Styling */
 body {
-  font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #fdfcfb, #e2d1c3);
   display: flex;
   justify-content: center;
-  background: url("images/background.jpg") no-repeat center center fixed;
-  background-size: cover;
+  align-items: center;
+  min-height: 100vh;
 }
 
 /* Container */
 .container {
-  background: #fff;
-  max-width: 900px;
-  width: 100%;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  width: 90%;
+  max-width: 1200px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: grid;
+  gap: 25px;
 }
 
 /* Header */
-h1 {
+header {
   text-align: center;
-  margin-bottom: 20px;
+  background: rgb(74, 144, 226);
+  padding: 20px;
+  border-radius: 0.5rem;
+  color: white;
 }
-
-/* Form Styling */
-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-bottom: 20px;
+.header-icon {
+  width: 80px;
 }
-
-form input,
-form textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
+header h1 {
+  font-size: 32px;
 }
-
-form textarea {
-  grid-column: span 2;
-  resize: vertical;
-}
-
-form button {
-  grid-column: span 2;
-  padding: 12px;
-  border: none;
-  background: #007b5e;
-  color: #fff;
+header p {
   font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-form button:hover {
-  background: #005f47;
+/* Task Container */
+.task-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.left-section, .right-section {
+  flex: 1;
+  min-width: 300px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.left-section:hover, .right-section:hover {
+  transform: translateY(-5px);
 }
 
-/* Error messages */
-.error {
-  grid-column: span 2;
-  color: red;
-  font-size: 0.85rem;
-  margin-top: -10px;
-  margin-bottom: 5px;
-}
-
-/* Table Styling */
+/* Table */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
-
-table th,
-table td {
+th, td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 8px;
   text-align: center;
 }
-
-table th {
-  background: #007b5e;
-  color: #fff;
+th {
+  background: #f4f4f4;
 }
 
-/* Remove Button */
-.remove-btn {
-  background: #e74c3c;
-  color: #fff;
+/* Form Section */
+#formSection {
+  background: #fff;
+  padding: 20px;
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+}
+label {
+  display: block;
+  margin-top: 10px;
+}
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+.error-message {
+  color: rgb(231, 76, 60);
+  font-size: 14px;
+  margin: 2px 0 0 0;
+}
+
+/* Buttons */
+button {
+  margin-top: 15px;
+  background: #4a90e2;
+  color: white;
+  padding: 10px 20px;
   border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
+  border-radius: 0.3rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: 0.3s;
+}
+button:hover {
+  background: #357ABD;
+  transform: scale(1.05);
+}
+.back-btn {
+  background: #777;
+}
+.back-btn:hover {
+  background: #555;
 }
 
-.remove-btn:hover {
-  background: #c0392b;
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  border-top: 1px solid #ddd;
+  padding: 15px;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 1024px) {
-  body { font-size: 18px; }
+  .container {
+    width: 95%;
+  }
 }
-
 @media (max-width: 768px) {
-  form { grid-template-columns: 1fr; }
-  body { font-size: 16px; }
+  .task-container {
+    flex-direction: column;
+  }
 }
-
 @media (max-width: 480px) {
-  form { grid-template-columns: 1fr; }
-  body { font-size: 14px; }
+  body {
+    font-size: 0.9rem;
+  }
+  input, select {
+    padding: 6px;
+  }
 }
