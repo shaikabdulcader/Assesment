@@ -1,70 +1,130 @@
-const babysitterForm = document.getElementById("babysitterForm");
-const babysitterList = document.getElementById("babysitterList");
+// Elements
+const showFormBtn = document.getElementById("showFormBtn");
+const backBtn = document.getElementById("backBtn");
+const formSection = document.getElementById("formSection");
+const taskContainer = document.getElementById("taskContainer");
+const taskForm = document.getElementById("taskForm");
 
-let babysitters = [];
+const taskName = document.getElementById("taskName");
+const priority = document.getElementById("priority");
+const dueDate = document.getElementById("dueDate");
 
-// Form Submit Handler
-babysitterForm.addEventListener("submit", function (e) {
+const taskNameError = document.getElementById("taskNameError");
+const priorityError = document.getElementById("priorityError");
+const dueDateError = document.getElementById("dueDateError");
+
+const taskTableBody = document.getElementById("taskTableBody");
+const completedTasksList = document.getElementById("completedTasksList");
+
+let tasks = [];
+let completedTasks = [];
+
+// Show form
+showFormBtn.addEventListener("click", () => {
+  formSection.style.display = "block";
+  taskContainer.style.display = "none";
+});
+
+// Hide form
+backBtn.addEventListener("click", () => {
+  formSection.style.display = "none";
+  taskContainer.style.display = "flex";
+});
+
+// Form submission
+taskForm.addEventListener("submit", (e) => {
   e.preventDefault();
-
-  // Get field values
-  const name = document.getElementById("name").value.trim();
-  const age = document.getElementById("age").value.trim();
-  const contact = document.getElementById("contact").value.trim();
-  const availability = document.getElementById("availability").value.trim();
-  const rate = document.getElementById("rate").value.trim();
-  const experience = document.getElementById("experience").value.trim();
-  const notes = document.getElementById("notes").value.trim();
-
-  // Clear previous errors
-  document.querySelectorAll(".error").forEach(el => el.textContent = "");
-
+  
   let valid = true;
 
   // Validation
-  if (!name) { document.getElementById("nameError").textContent = "Name is required."; valid = false; }
-  if (!age) { document.getElementById("ageError").textContent = "Age is required."; valid = false; }
-  if (!contact) { document.getElementById("contactError").textContent = "Contact is required."; valid = false; }
-  if (!availability) { document.getElementById("availabilityError").textContent = "Availability is required."; valid = false; }
-  if (!rate) { document.getElementById("rateError").textContent = "Rate is required."; valid = false; }
-  if (!experience) { document.getElementById("experienceError").textContent = "Experience is required."; valid = false; }
+  if (taskName.value.trim() === "") {
+    taskNameError.textContent = "TaskName is required!";
+    valid = false;
+  } else {
+    taskNameError.textContent = "";
+  }
+
+  if (priority.value === "") {
+    priorityError.textContent = "Priority is required!";
+    valid = false;
+  } else {
+    priorityError.textContent = "";
+  }
+
+  if (dueDate.value === "") {
+    dueDateError.textContent = "DueDate is required!";
+    valid = false;
+  } else {
+    dueDateError.textContent = "";
+  }
 
   if (!valid) return;
 
-  // Add babysitter
-  babysitters.push({ name, age, contact, availability, rate, experience, notes });
-  renderTable();
+  // Add new task
+  const newTask = {
+    id: Date.now(),
+    name: taskName.value,
+    priority: priority.value,
+    dueDate: dueDate.value
+  };
+  tasks.push(newTask);
 
-  babysitterForm.reset();
+  renderTasks();
+
+  // Reset form
+  taskForm.reset();
+  formSection.style.display = "none";
+  taskContainer.style.display = "flex";
 });
 
-// Render Table
-function renderTable() {
-  babysitterList.innerHTML = "";
-
-  if (babysitters.length === 0) {
-    babysitterList.innerHTML = `<tr><td colspan="8">No babysitters added yet.</td></tr>`;
+// Render tasks
+function renderTasks() {
+  taskTableBody.innerHTML = "";
+  if (tasks.length === 0) {
+    taskTableBody.innerHTML = `<tr><td colspan="4">No tasks added yet.</td></tr>`;
     return;
   }
 
-  babysitters.forEach((b, index) => {
+  tasks.forEach(task => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${b.name}</td>
-      <td>${b.age}</td>
-      <td>${b.contact}</td>
-      <td>${b.availability}</td>
-      <td>$${b.rate}</td>
-      <td>${b.experience} yrs</td>
-      <td>${b.notes || "-"}</td>
-      <td><button class="remove-btn" onclick="removeBabysitter(${index})">Remove</button></td>
+      <td><input type="checkbox" data-id="${task.id}"></td>
+      <td>${task.name}</td>
+      <td>${task.priority}</td>
+      <td>${task.dueDate}</td>
     `;
-    babysitterList.appendChild(row);
+    taskTableBody.appendChild(row);
+
+    row.querySelector("input").addEventListener("change", (e) => {
+      if (e.target.checked) {
+        completeTask(task.id);
+      }
+    });
   });
 }
 
-// Remove Babysitter
-function removeBabysitter(index) {
-  babysitters.splice(index, 1);
-  renderTable();
+// Complete task
+function completeTask(id) {
+  const task = tasks.find(t => t.id === id);
+  tasks = tasks.filter(t => t.id !== id);
+  completedTasks.push(task);
+
+  renderTasks();
+  renderCompletedTasks();
+}
+
+// Render completed tasks
+function renderCompletedTasks() {
+  completedTasksList.innerHTML = "";
+  if (completedTasks.length === 0) {
+    completedTasksList.innerHTML = "<li>No tasks completed yet.</li>";
+    return;
+  }
+
+  completedTasks.forEach(task => {
+    const li = document.createElement("li");
+    li.textContent = `${task.name} (Priority: ${task.priority}, Due: ${task.dueDate})`;
+    completedTasksList.appendChild(li);
+  });
 }
