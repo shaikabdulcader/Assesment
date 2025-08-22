@@ -3,59 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Babysitter Tracker</title>
+  <title>To-Do Task List</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Babysitter Tracker</h1>
+  <section class="container">
+    <!-- Header -->
+    <header>
+      <img src="images/icon.png" alt="Task Icon" class="header-icon">
+      <h1>To-Do Task List</h1>
+      <p>Manage your daily tasks effectively</p>
+    </header>
 
-    <!-- Babysitter Form -->
-    <form id="babysitterForm" novalidate>
-      <input type="text" id="name" placeholder="Name">
-      <span class="error" id="nameError"></span>
+    <!-- Task Container -->
+    <div class="task-container" id="taskContainer">
+      <!-- Left Section: Tasks -->
+      <div id="taskSection" class="left-section">
+        <h2>Your Tasks</h2>
+        <button class="view-form-btn" id="showFormBtn">Add New Task</button>
+        <table id="taskTable">
+          <thead>
+            <tr>
+              <th>Done</th>
+              <th>Task Name</th>
+              <th>Priority</th>
+              <th>Due Date</th>
+            </tr>
+          </thead>
+          <tbody id="taskTableBody">
+            <tr>
+              <td colspan="4">No tasks added yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <input type="number" id="age" placeholder="Age">
-      <span class="error" id="ageError"></span>
+      <!-- Right Section: Completed Tasks -->
+      <div id="completedSection" class="right-section">
+        <h2>Completed Tasks</h2>
+        <ul id="completedTasksList">
+          <li>No tasks completed yet.</li>
+        </ul>
+      </div>
+    </div>
 
-      <input type="text" id="contact" placeholder="Contact Number">
-      <span class="error" id="contactError"></span>
+    <!-- Form Section (Initially Hidden) -->
+    <div id="formSection" style="display:none;">
+      <h2>Add a New Task</h2>
+      <form id="taskForm">
+        <!-- Task Name -->
+        <label for="taskName">Task Name</label>
+        <input type="text" id="taskName">
+        <p class="error-message" id="taskNameError"></p>
 
-      <input type="text" id="availability" placeholder="Availability (e.g. Weekends)">
-      <span class="error" id="availabilityError"></span>
+        <!-- Priority -->
+        <label for="priority">Priority</label>
+        <select id="priority">
+          <option value="">Select Priority</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <p class="error-message" id="priorityError"></p>
 
-      <input type="number" id="rate" placeholder="Hourly Rate ($)">
-      <span class="error" id="rateError"></span>
+        <!-- Due Date -->
+        <label for="dueDate">Due Date</label>
+        <input type="date" id="dueDate">
+        <p class="error-message" id="dueDateError"></p>
 
-      <input type="number" id="experience" placeholder="Years of Experience">
-      <span class="error" id="experienceError"></span>
+        <!-- Buttons -->
+        <button type="submit">Add Task</button>
+        <button type="button" class="back-btn" id="backBtn">Back</button>
+      </form>
+    </div>
 
-      <textarea id="notes" placeholder="Notes (optional)"></textarea>
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 TaskMaster | All Rights Reserved.</p>
+    </footer>
+  </section>
 
-      <button type="submit">Add Babysitter</button>
-    </form>
-
-    <!-- Babysitter Table -->
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Contact</th>
-          <th>Availability</th>
-          <th>Rate</th>
-          <th>Experience</th>
-          <th>Notes</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="babysitterList">
-        <tr>
-          <td colspan="8">No babysitters added yet.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
   <script src="script.js"></script>
 </body>
 </html>
